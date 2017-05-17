@@ -18,6 +18,7 @@ public class SimpleListMock {
 		List<String> array = new ArrayList<>();
 		array.add("绘制");
 		array.add("裁剪");
+		array.add("拍照");
 		return array;
 	}
 }

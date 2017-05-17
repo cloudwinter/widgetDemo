@@ -1,7 +1,9 @@
 package com.summer.demo.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -48,6 +50,21 @@ public class DisplayUtil {
 			e.printStackTrace();
 		}
 		return statusBarHeight;
+	}
+
+	/**
+	 * 该方法依赖WMS的回调，所以在activity初始化的时候值是空的，建议在onWindowFocusChanged中执行 获取除去状态栏之外的尺寸
+	 *
+	 * @param activity
+	 * @return
+	 */
+	public static Point getWindowContentScreenMetrics(Activity activity) {
+		Point p = new Point();
+		Rect frame = new Rect();
+		activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+		p.x = frame.width();
+		p.y = frame.height();
+		return p;
 	}
 
 }

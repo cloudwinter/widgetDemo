@@ -17,4 +17,11 @@
         <attr name="ucrop_show_frame" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="CameraShadeView">
+        <attr name="rect_left" format="dimension"></attr>
+        <attr name="rect_top" format="dimension"></attr>
+        <attr name="rect_right" format="dimension"></attr>
+        <attr name="rect_bottom" format="dimension"></attr>
+    </declare-styleable>
+
 </resources>

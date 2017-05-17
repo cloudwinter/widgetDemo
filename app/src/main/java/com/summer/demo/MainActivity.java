@@ -1,5 +1,6 @@
 package com.summer.demo;
 
+import com.summer.demo.camera.ui.CustomCameraActivity;
 import com.summer.demo.core.BaseActivity;
 import com.summer.demo.crop.CropActivity;
 import com.summer.demo.draw.ui.DrawActivity;
@@ -42,6 +43,9 @@ public class MainActivity extends BaseActivity {
 				break;
 			case 1:
 				intent.setClass(MainActivity.this, CropActivity.class);
+				break;
+			case 2:
+				intent.setClass(MainActivity.this, CustomCameraActivity.class);
 				break;
 			default:
 				break;
