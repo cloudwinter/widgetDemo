@@ -1,2 +1,0 @@
-# widgetDemo
-android Widget practice
