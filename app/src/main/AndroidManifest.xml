@@ -49,11 +49,28 @@
             </intent-filter>
         </activity>
 
+        <!-- 绘制 -->
         <activity
             android:name=".draw.ui.DrawActivity"
             android:screenOrientation="portrait"></activity>
+
+        <!-- 裁剪 -->
         <activity android:name=".crop.CropActivity"></activity>
+
+        <!-- 相机 -->
         <activity android:name=".camera.ui.CustomCameraActivity"></activity>
+        <activity android:name=".camera.ui.DecodeActivity"></activity>
+
+        <!-- 动画 -->
+        <activity android:name=".animation.ui.FrameAnimationActivity"></activity>
+        <activity android:name=".animation.ui.TweenAnimationActivity"></activity>
+        <activity android:name=".animation.ui.PropertyAnimationActivity"></activity>
+
+        <!-- mvp -->
+        <activity android:name=".mvp.view.MVPActivity"></activity>
+
+        <!-- 横向的listView -->
+        <activity android:name=".listview.ui.ListActivity"></activity>
 
         <meta-data
             android:name="UMEEG_CHANNEL"

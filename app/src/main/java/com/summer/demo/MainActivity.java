@@ -1,10 +1,15 @@
 package com.summer.demo;
 
+import com.summer.demo.animation.ui.FrameAnimationActivity;
+import com.summer.demo.animation.ui.TweenAnimationActivity;
 import com.summer.demo.camera.ui.CustomCameraActivity;
+import com.summer.demo.camera.ui.DecodeActivity;
 import com.summer.demo.core.BaseActivity;
 import com.summer.demo.crop.CropActivity;
 import com.summer.demo.draw.ui.DrawActivity;
+import com.summer.demo.listview.ui.ListActivity;
 import com.summer.demo.mock.SimpleListMock;
+import com.summer.demo.mvp.view.MVPActivity;
 import com.summer.demo.title.BaseTitleView;
 
 import android.content.Intent;
@@ -45,7 +50,17 @@ public class MainActivity extends BaseActivity {
 				intent.setClass(MainActivity.this, CropActivity.class);
 				break;
 			case 2:
-				intent.setClass(MainActivity.this, CustomCameraActivity.class);
+				intent.setClass(MainActivity.this, DecodeActivity.class);
+				break;
+			case 3:
+				intent.setClass(MainActivity.this,
+						TweenAnimationActivity.class);
+				break;
+			case 4:
+				intent.setClass(MainActivity.this, ListActivity.class);
+				break;
+			case 5:
+				intent.setClass(MainActivity.this, MVPActivity.class);
 				break;
 			default:
 				break;

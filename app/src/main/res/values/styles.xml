@@ -24,7 +24,14 @@
         <!--跳回一个Activity也包括两部分，当前Activity摧毁动画，上个Actiivty进入动画-->
         <item name="android:activityCloseEnterAnimation">@anim/left_in</item>
         <item name="android:activityCloseExitAnimation">@anim/right_out</item>
+    </style>
 
+    <!-- 自定义菊花dialog -->
+    <style name="CustomProgressDialog" parent="@android:style/Animation.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
 </resources>

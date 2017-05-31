@@ -18,10 +18,37 @@
     </declare-styleable>
 
     <declare-styleable name="CameraShadeView">
-        <attr name="rect_left" format="dimension"></attr>
-        <attr name="rect_top" format="dimension"></attr>
-        <attr name="rect_right" format="dimension"></attr>
-        <attr name="rect_bottom" format="dimension"></attr>
+        <attr name="hollow_shape">
+            <enum name="rectangle" value="0"></enum>
+            <enum name="square" value="1"></enum>
+        </attr>
+        <attr name="hollow_gravity">
+            <enum name="top" value="0"></enum>
+            <enum name="center" value="1"></enum>
+            <enum name="bottom" value="2"></enum>
+        </attr>
+        <!-- 阴影和镂空的间距-->
+        <attr name="hollow_margin_left" format="dimension"></attr>
+        <attr name="hollow_margin_top" format="dimension"></attr>
+        <attr name="hollow_margin_right" format="dimension"></attr>
+        <attr name="hollow_margin_bottom" format="dimension"></attr>
     </declare-styleable>
+
+    <!-- Defines the custom XML attributes supported for a HorizontalListView -->
+    <declare-styleable name="HorizontalListView">
+        <attr name="dividerWidth" format="dimension" />
+        <attr name="android:divider" />
+        <attr name="android:requiresFadingEdge" />
+        <attr name="android:fadingEdgeLength" />
+    </declare-styleable>
+
+    <declare-styleable name="FixRatioRelativeLayout">
+        <attr name="ratio" format="float"></attr>
+        <attr name="fixed">
+            <enum name="width" value="0"></enum>
+            <enum name="height" value="1"></enum>
+        </attr>
+    </declare-styleable>
+
 
 </resources>

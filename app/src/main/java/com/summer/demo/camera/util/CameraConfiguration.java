@@ -31,8 +31,11 @@ public class CameraConfiguration {
 		Camera.Parameters parameters = camera.getParameters();
 		setCameraOrientation(parameters);
 		setCameraSize(parameters);
-		camera.setDisplayOrientation(90);
 		camera.setParameters(parameters);
+		camera.setDisplayOrientation(90);
+
+		Camera.Size size = camera.getParameters().getPreviewSize();
+		Log.e("CameraConfiguration","preview result: width="+size.width+" height:"+size.height);
 	}
 
 	/**
@@ -59,6 +62,8 @@ public class CameraConfiguration {
 				+ " height=" + pointPreview.y);
 		Log.e(TAG, " result -->picsSizes:width=" + pointPicsView.x + " height="
 				+ pointPicsView.y);
+		parameters.setPreviewSize(pointPreview.x, pointPreview.y);
+		parameters.setPictureSize(pointPicsView.x, pointPicsView.y);
 
 	}
 

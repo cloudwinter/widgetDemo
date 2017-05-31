@@ -17,85 +17,20 @@ import android.widget.Button;
  * Created by xiayundong on 2017/5/11.
  */
 
-public class CustomCameraActivity extends BaseActivity
-		implements SurfaceHolder.Callback {
+public class CustomCameraActivity extends AbsCameraActivity {
 
-	private SurfaceView mSurfaceView;
 	private Button mCaptureBtn;
 
-	private CameraHandler mCameraHandler;
-	private CameraManager mManager;
-	private SurfaceHolder mSurfaceHolder;
-	/**
-	 * surfaceView是否加载成功
-	 */
-	private boolean mHasSurfaceView;
+	@Override
+	public int contentRes() {
+		return R.layout.activity_custom_camera;
+	}
 
 	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_custom_camera);
-		mSurfaceView = (SurfaceView) findViewById(R.id.view_surface);
+	protected void init() {
 		mCaptureBtn = (Button) findViewById(R.id.but_capture);
 		mCaptureBtn.setOnClickListener(mShootClick);
-		mSurfaceHolder = mSurfaceView.getHolder();
-		mHasSurfaceView = false;
-		mManager = new CameraManager(this);
 		mManager.setAutoCallBackListener(mAutoFocusCallBack);
-		mCameraHandler = new CameraHandler(this, mManager);
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (mHasSurfaceView) {
-			initCamera();
-		} else {
-			mSurfaceHolder.addCallback(this);
-		}
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		mManager.stopPreView();
-		if (!mHasSurfaceView) {
-			mSurfaceHolder.removeCallback(this);
-		}
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		mManager.releaseCamera();
-	}
-
-	/**
-	 * 初始化相机
-	 */
-	private void initCamera() {
-		mManager.openDriver(mSurfaceHolder);
-		mManager.startPreView();
-		mManager.autoFocus(CameraHandler.MSG_WHAT_AUTO_FOCUS);
-	}
-
-	@Override
-	public void surfaceCreated(SurfaceHolder holder) {
-		if (!mHasSurfaceView) {
-			mHasSurfaceView = true;
-			initCamera();
-		}
-	}
-
-	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-
-	}
-
-	@Override
-	public void surfaceDestroyed(SurfaceHolder holder) {
-		mHasSurfaceView = false;
 	}
 
 	/**
@@ -129,4 +64,5 @@ public class CustomCameraActivity extends BaseActivity
 			mManager.autoFocus(CameraHandler.MSG_WHAT_TAKE_PICS);
 		}
 	};
+
 }

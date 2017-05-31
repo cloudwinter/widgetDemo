@@ -1,7 +1,10 @@
 package com.summer.demo.camera.util;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.hardware.Camera;
+import android.os.Handler;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
 /**
@@ -15,10 +18,24 @@ public class CameraManager {
 	private CameraConfiguration mCameraConfiguration;
 	private boolean mIsPreViewing;
 	private AutoFocusCallBack mAutoFocusCallBack;
+	private PreviewCallBack mPreviewCallBack;
 
 	public CameraManager(Context context) {
 		mContext = context;
 		mCameraConfiguration = new CameraConfiguration(context);
+		mPreviewCallBack = new PreviewCallBack();
+	}
+
+	/**
+	 * 获取preview的size
+	 * 
+	 * @return
+	 */
+	public Camera.Size getCameraPreViewSize() {
+		if (mCamera == null) {
+			return null;
+		}
+		return mCamera.getParameters().getPreviewSize();
 	}
 
 	/**
@@ -44,7 +61,7 @@ public class CameraManager {
 	/**
 	 * 预览图片
 	 */
-	public void startPreView() {
+	public synchronized void startPreView() {
 		if (mCamera == null || mIsPreViewing) {
 			return;
 		}
@@ -55,7 +72,7 @@ public class CameraManager {
 	/**
 	 * 停止预览
 	 */
-	public void stopPreView() {
+	public synchronized void stopPreView() {
 		if (mCamera == null || !mIsPreViewing) {
 			return;
 		}
@@ -78,7 +95,7 @@ public class CameraManager {
 	 * @param msgWhat
 	 *            101自动聚焦 102拍照前聚焦
 	 */
-	public void autoFocus(final int msgWhat) {
+	public synchronized void autoFocus(final int msgWhat) {
 		if (mCamera == null || !mIsPreViewing) {
 			return;
 		}
@@ -93,7 +110,7 @@ public class CameraManager {
 		// TODO: 2017/5/12
 	}
 
-	public void cancelAutoFocus() {
+	public synchronized void cancelAutoFocus() {
 		if (mCamera == null) {
 			return;
 		}
@@ -113,6 +130,20 @@ public class CameraManager {
 			e.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * 扫码
+	 * 
+	 */
+	public synchronized void requestPreviewFrame() {
+		if (mCamera == null) {
+			return;
+		}
+		if (!mIsPreViewing) {
+			startPreView();
+		}
+		mCamera.setOneShotPreviewCallback(mPreviewCallBack);
 	}
 
 	/**

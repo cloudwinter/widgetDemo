@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.summer.demo.title.BaseTitleView
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.summer.demo.animation.widget.NoticeVerRolllView
+        android:id="@+id/view_notice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp" />
+
+
+    <LinearLayout
+        android:id="@+id/layout_linear"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_first"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="第一条数据第一条数据第一条数据第一条数据"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/text_second"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/holo_green_light"
+            android:text="第二条数据第二条数据第二条数据第二条数据"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:gravity="center_vertical"/>
+
+    </LinearLayout>
+
+</LinearLayout>
