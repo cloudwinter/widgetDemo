@@ -22,6 +22,7 @@ public class SimpleListMock {
 		array.add("动画");
 		array.add("横向列表");
 		array.add("mvp");
+		array.add("注解");
 		return array;
 	}
 }

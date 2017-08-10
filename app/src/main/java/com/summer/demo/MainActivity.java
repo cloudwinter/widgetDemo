@@ -2,6 +2,7 @@ package com.summer.demo;
 
 import com.summer.demo.animation.ui.FrameAnimationActivity;
 import com.summer.demo.animation.ui.TweenAnimationActivity;
+import com.summer.demo.annotation.ui.AnnotationActivity;
 import com.summer.demo.camera.ui.CustomCameraActivity;
 import com.summer.demo.camera.ui.DecodeActivity;
 import com.summer.demo.core.BaseActivity;
@@ -62,6 +63,9 @@ public class MainActivity extends BaseActivity {
 			case 5:
 				intent.setClass(MainActivity.this, MVPActivity.class);
 				break;
+				case 6:
+					intent.setClass(MainActivity.this, AnnotationActivity.class);
+					break;
 			default:
 				break;
 			}

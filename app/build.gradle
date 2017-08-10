@@ -41,19 +41,19 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [ UMENG_CHANNEL_VALUE:'default_channel']
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: 'default_channel']
     }
 
     productFlavors {
-        default_channel{}
-        wandoujia{}
-        _360{}
-        yingyongbao{}
-        xiaomi{}
+        default_channel {}
+        wandoujia {}
+        _360 {}
+        yingyongbao {}
+        xiaomi {}
     }
     productFlavors.all {
         flavor ->
-            flavor.manifestPlaceholders = [ UMENG_CHANNEL_VALUE:name ]
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
     }
 
 }
