@@ -1,4 +1,4 @@
-package com.summer.demo;
+package com.summer.network;
 
 import org.junit.Test;
 

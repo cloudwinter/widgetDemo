@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/injectview-annotations/injectview-annotations.iml" filepath="$PROJECT_DIR$/injectview-annotations/injectview-annotations.iml" />
       <module fileurl="file://$PROJECT_DIR$/injectview-compiler/injectview-compiler.iml" filepath="$PROJECT_DIR$/injectview-compiler/injectview-compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/network/network.iml" filepath="$PROJECT_DIR$/network/network.iml" />
       <module fileurl="file://$PROJECT_DIR$/widgetDemo.iml" filepath="$PROJECT_DIR$/widgetDemo.iml" />
     </modules>
   </component>

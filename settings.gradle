@@ -1,1 +1,1 @@
-include ':app', ':injectview-annotations', ':injectview-annotations', ':injectview-compiler'
+include ':app', ':injectview-annotations', ':injectview-annotations', ':injectview-compiler', ':network'

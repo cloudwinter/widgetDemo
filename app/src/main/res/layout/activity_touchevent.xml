@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.summer.demo.touch.TouchEventFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.summer.demo.touch.TouchEventLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="@android:color/holo_blue_dark"
+        android:orientation="vertical">
+
+        <com.summer.demo.touch.TouchEventView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/holo_red_dark" />
+
+        <com.summer.demo.touch.TouchEventButton
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="50dp"
+            android:text="button" />
+
+    </com.summer.demo.touch.TouchEventLinearLayout>
+
+</com.summer.demo.touch.TouchEventFrameLayout>

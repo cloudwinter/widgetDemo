@@ -1,0 +1,29 @@
+@startuml
+'(*)  --> "check input"
+'If "input is verbose" then
+'--> [Yes] "turn on verbosity"
+'--> "run command"
+'else
+'--> "run command"
+'Endif
+'-->(*1)
+
+(*)  --> "execute(Runnable)"
+If "workCount < corPoolSize" then
+--> [Yes] "addWork(Runnable Boolean)"
+-->(*)
+else
+If "isRunning" then
+-->[Yes] "offer(Runnable)"
+If "success" then
+--> [Yes] (*)
+else
+--> "reject(Runnable)"
+-->(*)
+
+
+
+
+
+
+@endumlT

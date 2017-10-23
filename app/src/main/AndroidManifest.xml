@@ -75,6 +75,9 @@
         <!-- 注解 -->
         <activity android:name=".annotation.ui.AnnotationActivity"></activity>
 
+        <!-- touch事件分发 -->
+        <activity android:name=".touch.TouchEventActivity"></activity>
+
         <meta-data
             android:name="UMEEG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}"></meta-data>

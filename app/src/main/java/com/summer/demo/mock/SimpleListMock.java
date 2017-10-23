@@ -23,6 +23,7 @@ public class SimpleListMock {
 		array.add("横向列表");
 		array.add("mvp");
 		array.add("注解");
+		array.add("touch事件分发");
 		return array;
 	}
 }
