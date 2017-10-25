@@ -1,7 +1,5 @@
 package com.summer.network.okhttputil;
 
-import okhttp3.OkHttpClient;
-
 /**
  * 子类继承使用<br>
  * Created by xiayundong on 2017/10/20.
@@ -9,11 +7,11 @@ import okhttp3.OkHttpClient;
 
 public class OKNetModel {
 
-	protected OkHttpClient mOKHttpClient = null;
+	protected OKNetClient mOKNetClient = null;
 
 	public OKNetModel() {
-		if (mOKHttpClient == null) {
-			mOKHttpClient = new OkHttpClient();
+		if (mOKNetClient == null) {
+			mOKNetClient = new OKNetClient();
 		}
 	}
 

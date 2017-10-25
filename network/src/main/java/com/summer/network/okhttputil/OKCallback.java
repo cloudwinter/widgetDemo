@@ -6,14 +6,9 @@ package com.summer.network.okhttputil;
 
 public interface OKCallback<T> {
 
-	void notifyStart();
-
-	void notifyCancel();
-
 	void notifyFailure(int code, String msg);
 
 	void notifySuccess(T data);
 
-	void notifyFinish();
 
 }
