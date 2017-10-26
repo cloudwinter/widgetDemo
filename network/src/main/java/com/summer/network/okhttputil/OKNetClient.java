@@ -9,6 +9,12 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.summer.network.code.NetCode;
+import com.summer.network.okhttputil.notifer.OKResultNotifier;
+import com.summer.network.okhttputil.entity.OKBaseRequestParam;
+import com.summer.network.okhttputil.entity.OKResult;
+import com.summer.network.okhttputil.protocol.OKProtocol;
+import com.summer.network.okhttputil.protocol.OKProtocolAction;
+import com.summer.network.okhttputil.protocol.OKProtocolGroup;
 
 import android.text.TextUtils;
 
@@ -33,12 +39,20 @@ public class OKNetClient {
 	private static final MediaType JSON = MediaType
 			.parse("application/json; charset=utf-8");
 
+	private static OKProtocolGroup mProtocolGroup = new OKProtocolGroup();
+
 	private static OkHttpClient mOKHttpClient = null;
 
 	public OKNetClient() {
 		if (mOKHttpClient == null) {
 			mOKHttpClient = new OkHttpClient.Builder()
 					.connectTimeout(30, TimeUnit.SECONDS).build();
+		}
+	}
+
+	public static void addProtocol(OKProtocol protocol) {
+		synchronized (mProtocolGroup) {
+			protocol.add(mProtocolGroup);
 		}
 	}
 
@@ -49,7 +63,7 @@ public class OKNetClient {
 	 * @param callback
 	 */
 	public void postAsync(final OKBaseRequestParam param,
-			final OKCallback callback) {
+			final OKResultNotifier callback) {
 		Request request = buildRequest(param);
 		Call call = mOKHttpClient.newCall(request);
 		call.enqueue(new Callback() {
@@ -65,7 +79,8 @@ public class OKNetClient {
 				// 请求成功
 				OKProtocolAction protocolAction = OKProtocolGroup
 						.getProtocolAction(param.getClass());
-				callbackResult(callback, protocolAction.resultType, response);
+				callbackResult(callback, protocolAction.msgType,
+						protocolAction.resultType, response);
 			}
 		});
 	}
@@ -84,8 +99,8 @@ public class OKNetClient {
 			if (response.code() >= 200 && response.code() < 300) {
 				OKProtocolAction protocolAction = OKProtocolGroup
 						.getProtocolAction(param.getClass());
-				result = parseTypeJson(response.body().toString(),
-						protocolAction.resultType);
+				result = parseResultJson(response.body().toString(),
+						protocolAction.msgType, protocolAction.resultType);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -101,8 +116,8 @@ public class OKNetClient {
 	 * @param url
 	 * @param callback
 	 */
-	public void getAsync(String url, final Type dataType,
-			final OKCallback callback) {
+	public void getAsync(String url, final Type messageType,
+			final Type dataType, final OKResultNotifier callback) {
 		Request request = new Request.Builder().url(url).build();
 		Call call = mOKHttpClient.newCall(request);
 		call.enqueue(new Callback() {
@@ -115,7 +130,7 @@ public class OKNetClient {
 			@Override
 			public void onResponse(Call call, Response response)
 					throws IOException {
-				callbackResult(callback, dataType, response);
+				callbackResult(callback, messageType, dataType, response);
 			}
 		});
 	}
@@ -127,14 +142,15 @@ public class OKNetClient {
 	 * @param resultType
 	 * @return
 	 */
-	public OKResult getSync(String url, Type resultType) {
+	public OKResult getSync(String url, Type messageType, Type resultType) {
 		Request request = new Request.Builder().url(url).build();
 		Call call = mOKHttpClient.newCall(request);
 		OKResult result = null;
 		try {
 			Response response = call.execute();
 			if (response.code() >= 200 && response.code() < 300) {
-				result = parseTypeJson(response.body().toString(), resultType);
+				result = parseResultJson(response.body().toString(),
+						messageType, resultType);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -166,22 +182,17 @@ public class OKNetClient {
 	 * @param callback
 	 * @param response
 	 */
-	private void callbackResult(OKCallback callback, Type dataType,
-			Response response) {
+	private void callbackResult(OKResultNotifier callback, Type messageType,
+								Type dataType, Response response) {
 		if (response == null) {
 			callback.notifyFailure(NetCode.RESULT_CODE_RESPONSE_NULL,
 					NetCode.RESULT_CODE_RESPONSE_NULL_MSG);
 		} else {
 			if (response.code() >= 200 && response.code() < 300) {
 				try {
-					OKResult result = parseTypeJson(response.body().toString(),
-							dataType);
-					if (result.resultCode == NetCode.RESULT_CODE_SUCCESS) {
-						callback.notifySuccess(result.data);
-					} else {
-						callback.notifyFailure(result.resultCode,
-								result.resultMsg);
-					}
+					OKResult result = parseResultJson(
+							response.body().toString(), messageType, dataType);
+					callback.notifySuccess(result);
 				} catch (JSONException e) {
 					callback.notifyFailure(NetCode.RESULT_CODE_JSON_ERROR,
 							NetCode.RESULT_CODE_JSON_ERROR_MSG);
@@ -202,19 +213,19 @@ public class OKNetClient {
 	 * @return
 	 * @throws Exception
 	 */
-	private <T> OKResult<T> parseTypeJson(String result, Type resultType)
-			throws JSONException {
-		OKResult<T> okResult = null;
+	private <MessageType, DataType> OKResult<MessageType, DataType> parseResultJson(
+			String result, Type msgType, Type resultType) throws JSONException {
+		OKResult<MessageType, DataType> okResult = null;
 		if (TextUtils.isEmpty(result)) {
-			okResult = new OKResult<T>();
+			okResult = new OKResult<>();
 			okResult.resultCode = NetCode.RESULT_CODE_RESPONSE_NULL;
-			okResult.resultMsg = NetCode.RESULT_CODE_RESPONSE_NULL_MSG;
 			return okResult;
 		}
 		JSONObject jsonObject = new JSONObject(result);
 		okResult.resultCode = jsonObject.getInt(OKResult.JSON_CODE);
 		if (jsonObject.has(OKResult.JSON_MSG)) {
-			okResult.resultMsg = jsonObject.getString(OKResult.JSON_MSG);
+			okResult.resultMsg = parseTypeJson(
+					jsonObject.getString(OKResult.JSON_MSG), msgType);
 		}
 		if (resultType != Void.class) {
 			String content = jsonObject.has(OKResult.JSON_DATA)
@@ -224,6 +235,21 @@ public class OKNetClient {
 			}
 		}
 		return okResult;
+	}
+
+	/**
+	 * 将json字符串解析成对应的Type
+	 * 
+	 * @param jsonStr
+	 * @param type
+	 */
+	private <MessageType> MessageType parseTypeJson(String jsonStr, Type type) {
+		MessageType messageType = null;
+		if (TextUtils.isEmpty(jsonStr) || type == Void.class) {
+			return messageType;
+		}
+		messageType = new Gson().fromJson(jsonStr, type);
+		return messageType;
 	}
 
 }

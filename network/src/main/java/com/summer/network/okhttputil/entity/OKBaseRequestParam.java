@@ -1,4 +1,4 @@
-package com.summer.network.okhttputil;
+package com.summer.network.okhttputil.entity;
 
 /**
  * 请求参数的基类<br>

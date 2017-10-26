@@ -1,4 +1,6 @@
-package com.summer.network.okhttputil;
+package com.summer.network.okhttputil.protocol;
+
+import com.summer.network.okhttputil.entity.OKBaseRequestParam;
 
 import java.util.HashMap;
 

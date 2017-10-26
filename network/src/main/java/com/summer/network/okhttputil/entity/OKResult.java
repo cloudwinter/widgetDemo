@@ -1,11 +1,11 @@
-package com.summer.network.okhttputil;
+package com.summer.network.okhttputil.entity;
 
 /**
  * 返回结果对象<br>
  * Created by xiayundong on 2017/10/20.
  */
 
-public class OKResult<T> {
+public class OKResult<MessageType, DataType> {
 
 	/**
 	 * 解析的json节点名称
@@ -19,7 +19,7 @@ public class OKResult<T> {
 	 */
 	public int resultCode;
 
-	public String resultMsg;
+	public MessageType resultMsg;
 
-	public T data;
+	public DataType data;
 }

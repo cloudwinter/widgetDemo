@@ -1,4 +1,4 @@
-package com.summer.network.okhttputil;
+package com.summer.network.okhttputil.protocol;
 
 import java.lang.reflect.Type;
 
@@ -14,12 +14,22 @@ public class OKProtocolAction {
 	public String url;
 
 	/**
+	 * 消息类型
+	 */
+	public Type msgType;
+
+	/**
 	 * 返回结果类型
 	 */
 	public Type resultType;
 
 	public OKProtocolAction(String url, Type resultType) {
+		this(url, String.class, resultType);
+	}
+
+	public OKProtocolAction(String url, Type msgType, Type resultType) {
 		this.url = url;
+		this.msgType = msgType;
 		this.resultType = resultType;
 	}
 }
