@@ -26,10 +26,12 @@ public class FixRatioRelativeLayout extends RelativeLayout {
 
 	public FixRatioRelativeLayout(Context context) {
 		super(context);
+		init(context, null);
 	}
 
 	public FixRatioRelativeLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		init(context, attrs);
 	}
 
 	private void init(Context context, AttributeSet attrs) {

@@ -78,6 +78,12 @@
         <!-- touch事件分发 -->
         <activity android:name=".touch.TouchEventActivity"></activity>
 
+        <!-- okhttp+handler -->
+        <activity android:name=".http.OKHttpTestActivity"></activity>
+
+        <!--bannerview -->
+        <activity android:name=".banner.ui.BannerActivity"></activity>
+
         <meta-data
             android:name="UMEEG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}"></meta-data>

@@ -70,7 +70,7 @@ public abstract class OKBaseResultHandler<MessageType, DataType>
 		Message message;
 		if (data.resultCode == NetCode.RESULT_CODE_SUCCESS) {
 			message = Message.obtain(mNetHandler, MSG_SUCCESS);
-			message.obj = data.data;
+			message.obj = data.resultData;
 		} else {
 			message = Message.obtain(mNetHandler, MSG_FAILURE);
 			message.obj = data.resultMsg;

@@ -12,7 +12,7 @@ public class OKResult<MessageType, DataType> {
 	 */
 	public transient static final String JSON_CODE = "resultCode";
 	public transient static final String JSON_MSG = "resultMsg";
-	public transient static final String JSON_DATA = "data";
+	public transient static final String JSON_DATA = "resultData";
 
 	/**
 	 * 返回的code码
@@ -21,5 +21,5 @@ public class OKResult<MessageType, DataType> {
 
 	public MessageType resultMsg;
 
-	public DataType data;
+	public DataType resultData;
 }

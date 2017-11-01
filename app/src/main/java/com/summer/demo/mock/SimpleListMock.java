@@ -24,6 +24,8 @@ public class SimpleListMock {
 		array.add("mvp");
 		array.add("注解");
 		array.add("touch事件分发");
+		array.add("okhttp+handler");
+		array.add("bannerview");
 		return array;
 	}
 }

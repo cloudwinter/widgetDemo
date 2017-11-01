@@ -14,4 +14,8 @@
     <color name="ucrop_color_default_crop_frame">#ffffff</color>
     <color name="ucrop_color_default_dimmed">#8c000000</color>
     <color name="ucrop_color_default_logo">#4f212121</color>
+
+    <!-- circle color-->
+    <color name="bg_circle_selected">#999999</color>
+    <color name="bg_circle_unselected">#ffffff</color>
 </resources>
