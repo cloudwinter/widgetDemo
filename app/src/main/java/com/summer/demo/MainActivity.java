@@ -80,6 +80,8 @@ public class MainActivity extends BaseActivity {
 				break;
 			}
 			startActivity(intent);
+			startService(intent);
+
 		}
 	};
 
